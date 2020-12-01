@@ -48,3 +48,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+.cpcache/
+.shadow-cljs/
+resources/public/js/
