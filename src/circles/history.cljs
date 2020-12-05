@@ -2,14 +2,18 @@
   (:require [circles.db :as db]
             [circles.event :as event]))
 
-(defn handle-historic-scale [circles events traverse-history direction]
-  (let [event (traverse-history events)]
+(defn handle-historic-scale
+  "`traverse` `events` in `direction`, and update `db` accordingly.
+  This resets circle sizes based on the scale events in the new event
+  store."
+  [db events traverse direction]
+  (let [event (traverse events)]
     (when (= :scale (:event event))
-      (db/apply-scale circles event direction))))
+      (db/apply-scale db event direction))))
 
-(defn undo [events circles]
+(defn undo [events db]
   (event/commit-last-scale events)
-  (handle-historic-scale circles events event/undo :from))
+  (handle-historic-scale db events event/undo :from))
 
-(defn redo [events circles]
-  (handle-historic-scale circles events event/redo :to))
+(defn redo [events db]
+  (handle-historic-scale db events event/redo :to))
