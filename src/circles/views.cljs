@@ -28,6 +28,6 @@
 (defn circle-scaler [{:keys [circle on-scale]}]
   [:div {:style {:display :flex :flex-direction :column}}
    [:label "Adjust diameter of circle at (" (:x circle) ", " (:y circle) ")."]
-   [:input {:type :range :min 1 :max 100 :step 1
-            :value (:radius circle)
+   [:input {:type :range :min 1 :max 200 :step 1
+            :value (* 2 (:radius circle))
             :on-change on-scale}]])
