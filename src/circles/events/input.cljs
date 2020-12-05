@@ -26,7 +26,7 @@
   (fn [event]
     (let [old-radius (get-in @circles
                              [:all-circles (:id selected-circle) :radius])
-          new-radius (int (.. event -target -value))
+          new-radius (/ (int (.. event -target -value)) 2)
           last-scale (:last-scale @events)
           new-scale (scale/make (:id selected-circle)
                                 (get last-scale :from old-radius)
